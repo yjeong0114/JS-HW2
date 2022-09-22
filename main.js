@@ -3,24 +3,26 @@
 Write a function that parses through the below object and displays all of their
 favorite food dishes as shown:
 */
-const json = '{"result":true, "count":42}';
-const obj = JSON.parse(json);
 
-console.log(obj.count);
-// expected output: 42
+let person3 = {
+    pizza:["Deep Dish","South Side Thin Crust"],
+    tacos:"Anything not from Taco bell",
+    burgers:"Portillos Burgers",
+    ice_cream:["Chocolate","Vanilla","Oreo"],
+    shakes:[{
+        oberwise:"Chocolate",
+        dunkin:"Vanilla",
+        culvers:"All of them",
+        mcDonalds:"Sham-rock-shake",
+        cupids_candies:"Chocolate Malt"
+    }]
+}
 
-console.log(obj.result);
-// expected output: true
+json = JSON.stringify(person3);
+// console.log(json)
 
-
-let person3 = '{"pizza":["Deep Dish","South Side Thin Crust"],"tacos":"Anything not from Taco bell","burgers":"Portillos Burgers", "ice_cream":["Chocolate","Vanilla","Oreo"], "shakes":[{"oberwise":"Chocolate", "dunkin":"Vanilla","culvers":"All of them","mcDonalds":"Sham-rock-shake","cupids_candies":"Chocolate Malt"}]}'
-let obj1 = JSON.parse(person3);
-console.log(obj1.pizza)
-console.log(obj1.tacos)
-console.log(obj1.burgers)
-console.log(obj1.ice_cream)
-console.log(obj1.shakes)
-
+const obj = JSON.parse(json, (key,value) =>
+    {console.log(`${value}`)})
 
 //=======Exercise #2=========//
 /*
@@ -37,18 +39,13 @@ age by 3 years. Use an arrow function for both methods
 function Person(name, age) {
     this.name = name;
     this.age = age;
-}
-
-
-Person.prototype.printInfo = () => {
-    console.log(this.name)
-    console.log(this.age)
-}
-Person.prototype.addAge = () => {
-    console.log(this.age)
-    a = this.age +1 
-    
-    console.log(`Adding age: ${a}`)
+    this.addage = (()=>{
+        age++;
+        console.log(`I am ${age}years old`)
+    })
+    this.printInfo = ((job)=>{
+        console.log(`My name is ${this.name} and I am ${job}...`)
+    })
 }
 
 let Person1 = new Person('Chloe', 1);
@@ -58,8 +55,12 @@ console.log(Person1);
 
 console.log(Person2);
 
-Person1.printInfo();
-Person2.printInfo();
+Person1.addage();
+Person1.addage();
+Person1.printInfo('Programmer');
+
+// Person1.printInfo();
+// Person2.printInfo();
 
 
 // Use an arrow to create the printInfo method
